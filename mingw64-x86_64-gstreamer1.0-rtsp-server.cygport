@@ -1,0 +1,23 @@
+CROSS_HOST="x86_64-w64-mingw32"
+inherit cross gstreamer
+
+NAME="mingw64-x86_64-gstreamer1.0-rtsp-server"
+VERSION=1.12.3
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="GStreamer RTSP server library for Win64 toolchain"
+DESCRIPTION="gst-rtsp-server is a library on top of GStreamer for building an
+RTSP server."
+HOMEPAGE="http://gstreamer.freedesktop.org/"
+SRC_URI="http://gstreamer.freedesktop.org/src/gst-rtsp-server/gst-rtsp-server-${VERSION}.tar.xz"
+SRC_DIR="gst-rtsp-server-${VERSION}"
+
+REQUIRES="mingw64-x86_64-gstreamer1.0-plugins-good"
+
+src_compile() {
+	cd ${S}
+	gstreamer_autoreconf
+	cd ${B}
+	cygconf
+	cygmake
+}
